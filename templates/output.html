@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Summary</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+      }
+
+      .container {
+        max-width: 800px; /* Maximum width of the text container */
+        margin: 20px auto; /* Center the container */
+        padding: 20px; /* Padding around the text */
+        background-color: white; /* White background for contrast */
+        border-radius: 8px; /* Rounded corners */
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+      }
+
+      h1 {
+        text-align: center; /* Center the heading */
+        color: #333; /* Dark color for the heading */
+      }
+
+      p li {
+        margin-bottom: 15px; /* Spacing between paragraphs */
+        color: #555; /* Slightly lighter color for text */
+      }
+
+      .back-button {
+        display: block;
+        width: 120px; /* Width of the button */
+        padding: 10px; /* Padding inside the button */
+        margin: 20px auto; /* Center the button */
+        background-color: #007bff; /* Button color */
+        color: white; /* Text color */
+        border: none; /* No border */
+        border-radius: 5px; /* Rounded corners for button */
+        cursor: pointer; /* Pointer cursor on hover */
+        font-size: 16px; /* Font size of button text */
+      }
+
+      .back-button:hover {
+        background-color: #0056b3; /* Darker shade on hover */
+      }
+
+      @media (max-width: 600px) {
+        .container {
+          padding: 10px; /* Reduce padding on smaller screens */
+        }
+        h1 {
+          font-size: 24px; /* Smaller heading on mobile */
+        }
+        h2 {
+          font-size: 18px; /* Smaller heading on mobile */
+        }
+        p li {
+          font-size: 16px; /* Smaller text on mobile */
+          text-align: justify;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Lets look at the details</h1>
+      <p>{{summary}}</p>
+      <h2>Positives</h2>
+      <ul>
+        {% for item in positives %}
+        <li>{{ item }}</li>
+        {% endfor %}
+      </ul>
+      <h2>Negatives</h2>
+      <ul>
+        {% for item in negatives %}
+        <li>{{ item }}</li>
+        {% endfor %}
+      </ul>
+      <h2>Technical Jargons</h2>
+      <ul>
+        {% for term in tech %}
+        <li>
+          <strong> <em>{{ term.jargon }}</em> </strong> -- {{term.meaning}}
+        </li>
+        {% endfor %}
+      </ul>
+      <button class="back-button" onclick="history.back()">Go Back</button>
+    </div>
+  </body>
+</html>
