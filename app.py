@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, request, send_file
+from flask import Flask, jsonify, render_template, request, send_file
 # from PIL import Image
 # from io import BytesIO
 import services
@@ -24,9 +24,25 @@ def upload_file():
         if file:
             print("process started")
             file.save(os.path.join(basedir, app.config['UPLOAD_PATH'], file.filename))
+            
             response = services.call_gemini2(os.path.join(basedir, app.config['UPLOAD_PATH'], file.filename))
-            print((response))
-            output = json.loads(response)
+            # response = response.replace('json ', '')
+            print('response is:')
+            print((response.strip()))
+            print("Raw response:", repr(response))
+            print("Response type:", type(response))
+            print("Response length:", len(response))
+            response = response.strip('```json\n').strip()
+            # if not response.strip():
+            #     return jsonify({"error": "Empty response from generate_content"}), 500
+            # try:
+            #     output = json.loads(response.strip())
+            # except json.JSONDecodeError as e:
+            #     print("JSON Decode Error:", str(e))
+            #     print("Response content:", response)
+            #     return jsonify({"error": "Invalid JSON response"}), 500
+            output = json.loads(response.strip())
+            print(output)
             os.remove(os.path.join(app.config['UPLOAD_PATH'],  file.filename))
             print("process completed")
             return render_template('output.html',summary = output["summary"], positives =  output["positives"], negatives = output["negatives"],tech = output["tech-jargon"] ) 

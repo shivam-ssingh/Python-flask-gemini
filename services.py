@@ -71,9 +71,9 @@ def ai2(path_name):
     genai.configure(api_key=API_KEY)
     model = genai.GenerativeModel("gemini-1.5-flash")
     uploaded_file = genai.upload_file(path_name)    
-    query = "Two parts, first Please summarize this file detailing the positives and negatives, second list down the technical jargons with meaning if any. Please provide your response in a json format, with key 'summary' to provide summary, key 'positives' point out the positives and 'negative' to point out negative, 'tech-jargon' to have a array of objects with jargon and meaning.Please make sure you only reply with json and nothing else"
+    query = "Two parts, first Please summarize this file detailing the positives and negatives, second list down the technical jargons with meaning if any. Please provide your response in a json format, with key 'summary' to provide summary, key 'positives' point out the positives and 'negative' to point out negative, 'tech-jargon' to have a array of objects with jargon and meaning.Please make sure you only reply with json and nothing else.Please make sure your response doesnt fail json.load() function of python"
     response = model.generate_content([uploaded_file, query])
-    # print(response.text)
+    print(response.text)
     return response.text
     # json_response = json.load(response.text)
     # return json_response
