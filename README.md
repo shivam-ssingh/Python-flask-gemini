@@ -26,7 +26,6 @@
 
 ---
 
----
 
 ## **AWS ECS Deployment**  
 
@@ -41,3 +40,5 @@
 3. The updated application is deployed to AWS ECS.  
 
 ---
+
+[](./github_actions_workflow.png)
