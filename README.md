@@ -41,4 +41,4 @@
 
 ---
 
-[](./github_actions_workflow.png)
+![](./github_actions_workflow.png)
