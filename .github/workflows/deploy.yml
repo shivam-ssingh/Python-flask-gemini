@@ -26,6 +26,21 @@ jobs:
         run: |
           echo "GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}" >> .env
 
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push to Docker Hub
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          push: true
+          tags: |
+            ${{ secrets.DOCKERHUB_USERNAME }}/finhelp:${{ github.sha }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/finhelp:latest
+
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
